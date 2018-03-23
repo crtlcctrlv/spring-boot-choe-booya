@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.cpdaily.hotguy.mapper.leave.LeaveRecordMapper">
+  <resultMap id="BaseResultMap" type="com.wisedu.cpdaily.hotguy.entity.mysql.LeaveRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_wid" jdbcType="BIGINT" property="userWid" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="leave_type" jdbcType="VARCHAR" property="leaveType" />
+    <result column="is_out" jdbcType="BIT" property="isOut" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="urgency_mobile" jdbcType="VARCHAR" property="urgencyMobile" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="leave_days" jdbcType="INTEGER" property="leaveDays" />
+    <result column="approver_id" jdbcType="VARCHAR" property="approverId" />
+    <result column="approver_wid" jdbcType="BIGINT" property="approverWid" />
+    <result column="approver_name" jdbcType="VARCHAR" property="approverName" />
+    <result column="leave_reason" jdbcType="VARCHAR" property="leaveReason" />
+    <result column="approver_opinion" jdbcType="VARCHAR" property="approverOpinion" />
+    <result column="report_comment" jdbcType="VARCHAR" property="reportComment" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="is_press" jdbcType="BIT" property="isPress" />
+    <result column="report_location" jdbcType="VARCHAR" property="reportLocation" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_wid, user_id, user_name, gender, leave_type, is_out, mobile, urgency_mobile, 
+    start_time, end_time, leave_days, approver_id, approver_wid, approver_name, leave_reason, 
+    approver_opinion, report_comment, status, is_press, report_location, create_time, 
+    update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.wisedu.cpdaily.hotguy.entity.mysql.LeaveRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_coun_leave_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_coun_leave_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_coun_leave_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wisedu.cpdaily.hotguy.entity.mysql.LeaveRecordExample">
+    delete from t_coun_leave_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.cpdaily.hotguy.entity.mysql.LeaveRecord">
+    insert into t_coun_leave_record (id, user_wid, user_id, 
+      user_name, gender, leave_type, 
+      is_out, mobile, urgency_mobile, 
+      start_time, end_time, leave_days, 
+      approver_id, approver_wid, approver_name, 
+      leave_reason, approver_opinion, report_comment, 
+      status, is_press, report_location, 
+      create_time, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{userWid,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{leaveType,jdbcType=VARCHAR}, 
+      #{isOut,jdbcType=BIT}, #{mobile,jdbcType=VARCHAR}, #{urgencyMobile,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{leaveDays,jdbcType=INTEGER}, 
+      #{approverId,jdbcType=VARCHAR}, #{approverWid,jdbcType=BIGINT}, #{approverName,jdbcType=VARCHAR}, 
+      #{leaveReason,jdbcType=VARCHAR}, #{approverOpinion,jdbcType=VARCHAR}, #{reportComment,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{isPress,jdbcType=BIT}, #{reportLocation,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.cpdaily.hotguy.entity.mysql.LeaveRecord">
+    insert into t_coun_leave_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userWid != null">
+        user_wid,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="leaveType != null">
+        leave_type,
+      </if>
+      <if test="isOut != null">
+        is_out,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="urgencyMobile != null">
+        urgency_mobile,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="leaveDays != null">
+        leave_days,
+      </if>
+      <if test="approverId != null">
+        approver_id,
+      </if>
+      <if test="approverWid != null">
+        approver_wid,
+      </if>
+      <if test="approverName != null">
+        approver_name,
+      </if>
+      <if test="leaveReason != null">
+        leave_reason,
+      </if>
+      <if test="approverOpinion != null">
+        approver_opinion,
+      </if>
+      <if test="reportComment != null">
+        report_comment,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isPress != null">
+        is_press,
+      </if>
+      <if test="reportLocation != null">
+        report_location,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userWid != null">
+        #{userWid,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveType != null">
+        #{leaveType,jdbcType=VARCHAR},
+      </if>
+      <if test="isOut != null">
+        #{isOut,jdbcType=BIT},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="urgencyMobile != null">
+        #{urgencyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveDays != null">
+        #{leaveDays,jdbcType=INTEGER},
+      </if>
+      <if test="approverId != null">
+        #{approverId,jdbcType=VARCHAR},
+      </if>
+      <if test="approverWid != null">
+        #{approverWid,jdbcType=BIGINT},
+      </if>
+      <if test="approverName != null">
+        #{approverName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveReason != null">
+        #{leaveReason,jdbcType=VARCHAR},
+      </if>
+      <if test="approverOpinion != null">
+        #{approverOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="reportComment != null">
+        #{reportComment,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isPress != null">
+        #{isPress,jdbcType=BIT},
+      </if>
+      <if test="reportLocation != null">
+        #{reportLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wisedu.cpdaily.hotguy.entity.mysql.LeaveRecordExample" resultType="java.lang.Long">
+    select count(*) from t_coun_leave_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_coun_leave_record
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userWid != null">
+        user_wid = #{record.userWid,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveType != null">
+        leave_type = #{record.leaveType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOut != null">
+        is_out = #{record.isOut,jdbcType=BIT},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgencyMobile != null">
+        urgency_mobile = #{record.urgencyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaveDays != null">
+        leave_days = #{record.leaveDays,jdbcType=INTEGER},
+      </if>
+      <if test="record.approverId != null">
+        approver_id = #{record.approverId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approverWid != null">
+        approver_wid = #{record.approverWid,jdbcType=BIGINT},
+      </if>
+      <if test="record.approverName != null">
+        approver_name = #{record.approverName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveReason != null">
+        leave_reason = #{record.leaveReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approverOpinion != null">
+        approver_opinion = #{record.approverOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportComment != null">
+        report_comment = #{record.reportComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isPress != null">
+        is_press = #{record.isPress,jdbcType=BIT},
+      </if>
+      <if test="record.reportLocation != null">
+        report_location = #{record.reportLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_coun_leave_record
+    set id = #{record.id,jdbcType=VARCHAR},
+      user_wid = #{record.userWid,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      leave_type = #{record.leaveType,jdbcType=VARCHAR},
+      is_out = #{record.isOut,jdbcType=BIT},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      urgency_mobile = #{record.urgencyMobile,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      leave_days = #{record.leaveDays,jdbcType=INTEGER},
+      approver_id = #{record.approverId,jdbcType=VARCHAR},
+      approver_wid = #{record.approverWid,jdbcType=BIGINT},
+      approver_name = #{record.approverName,jdbcType=VARCHAR},
+      leave_reason = #{record.leaveReason,jdbcType=VARCHAR},
+      approver_opinion = #{record.approverOpinion,jdbcType=VARCHAR},
+      report_comment = #{record.reportComment,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      is_press = #{record.isPress,jdbcType=BIT},
+      report_location = #{record.reportLocation,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.cpdaily.hotguy.entity.mysql.LeaveRecord">
+    update t_coun_leave_record
+    <set>
+      <if test="userWid != null">
+        user_wid = #{userWid,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveType != null">
+        leave_type = #{leaveType,jdbcType=VARCHAR},
+      </if>
+      <if test="isOut != null">
+        is_out = #{isOut,jdbcType=BIT},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="urgencyMobile != null">
+        urgency_mobile = #{urgencyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveDays != null">
+        leave_days = #{leaveDays,jdbcType=INTEGER},
+      </if>
+      <if test="approverId != null">
+        approver_id = #{approverId,jdbcType=VARCHAR},
+      </if>
+      <if test="approverWid != null">
+        approver_wid = #{approverWid,jdbcType=BIGINT},
+      </if>
+      <if test="approverName != null">
+        approver_name = #{approverName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveReason != null">
+        leave_reason = #{leaveReason,jdbcType=VARCHAR},
+      </if>
+      <if test="approverOpinion != null">
+        approver_opinion = #{approverOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="reportComment != null">
+        report_comment = #{reportComment,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isPress != null">
+        is_press = #{isPress,jdbcType=BIT},
+      </if>
+      <if test="reportLocation != null">
+        report_location = #{reportLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.cpdaily.hotguy.entity.mysql.LeaveRecord">
+    update t_coun_leave_record
+    set user_wid = #{userWid,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      leave_type = #{leaveType,jdbcType=VARCHAR},
+      is_out = #{isOut,jdbcType=BIT},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      urgency_mobile = #{urgencyMobile,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      leave_days = #{leaveDays,jdbcType=INTEGER},
+      approver_id = #{approverId,jdbcType=VARCHAR},
+      approver_wid = #{approverWid,jdbcType=BIGINT},
+      approver_name = #{approverName,jdbcType=VARCHAR},
+      leave_reason = #{leaveReason,jdbcType=VARCHAR},
+      approver_opinion = #{approverOpinion,jdbcType=VARCHAR},
+      report_comment = #{reportComment,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      is_press = #{isPress,jdbcType=BIT},
+      report_location = #{reportLocation,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
