@@ -5,9 +5,8 @@
 
 <generatorConfiguration>
 
-	<classPathEntry location="D:\Tools\mysql-connector-java-5.1.39.jar" />
-
-	<context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+	<context id="mysql" targetRuntime="MyBatis3"
+		defaultModelType="flat">
 
 		<!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
 		<property name="beginningDelimiter" value="`" />
@@ -22,35 +21,38 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://172.16.7.111:3306/wec_biz_counselor_leave" userId="admin"
-			password="wisedu@2016">
+			connectionURL="jdbc:mysql://172.16.7.111:3306/wec_biz_counselor_leave"
+			userId="admin" password="wisedu@2016">
 		</jdbcConnection>
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.wisedu.cpdaily.hotguy.entity.mysql"
-			targetProject="cpdaily-hotguy-tool/src/main/java">
+		<javaModelGenerator
+			targetPackage="com.choe.practice.boot.booya.entity.mysql"
+			targetProject="src/main/java">
 			<property name="enableSubPackages" value="false" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="mybatis.mapper.counselor"
-			targetProject="cpdaily-hotguy-tool/src/main/resources">
+		<sqlMapGenerator targetPackage="mybatis.mapper"
+			targetProject="src/main/resources">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.wisedu.cpdaily.hotguy.mapper.counselor"
-			targetProject="cpdaily-hotguy-tool/src/main/java">
+			targetPackage="com.choe.practice.boot.booya.mapper"
+			targetProject="src/main/java">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
-		<table tableName="t_coun_leave_record" domainObjectName="LeaveRecord">
-			<!--  <generatedKey column="id" sqlStatement="Mysql" identity="true" /> -->
-			<!--  <columnOverride column="C_USER_ID" property="createUserId" /> -->
-			<!--  <ignoreColumn column="alias"/> -->
+		<table tableName="t_coun_leave_record"
+			domainObjectName="LeaveRecord">
+			<generatedKey column="id" sqlStatement="Mysql"
+				identity="true" />
+			<!-- <columnOverride column="C_USER_ID" property="createUserId" /> -->
+			<!-- <ignoreColumn column="alias"/> -->
 		</table>
 
 	</context>
